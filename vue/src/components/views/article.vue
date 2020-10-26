@@ -7,7 +7,7 @@
   <div id="bg" v-if="article!==[]">
     <div class="top">
       <img class="back-to-top"
-           src="https://upload-images.jianshu.io/upload_images/18103462-29dc9627caa8be58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/650/format/webp">
+           src="../../assets/top.png">
     </div>
     <div id="header">
       <div id="nav1" >
@@ -148,10 +148,6 @@
     margin-bottom: 1.75em;
   }
 
-  .con {
-    float: left;
-    width: 70%;
-  }
 
 
   #bg {
@@ -387,6 +383,22 @@
         this.article = res.data;
       });
       // con.innerHTML=this.article.text;
+      $(function () {
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 180) {
+            $(".back-to-top").fadeIn(500);
+
+          }
+          else {
+            $(".back-to-top").fadeOut(1);
+          }
+        });
+
+        $(".back-to-top").click(function () {
+          $('body,html').animate({scrollTop: 0}, 100);
+          return false;
+        });
+      });
     },
     methods:{
       getAllArticles:function(){
@@ -409,21 +421,5 @@
       }
     }
   }
-  $(function () {
-    $(window).scroll(function () {
 
-      if ($(window).scrollTop() > 180) {
-        $(".back-to-top").fadeIn(500);
-
-      }
-      else {
-        $(".back-to-top").fadeOut(1);
-      }
-    });
-
-    $(".back-to-top").click(function () {
-      $('body,html').animate({scrollTop: 0}, 100);
-      return false;
-    });
-  });
 </script>

@@ -7,7 +7,7 @@
   <div id="bg" v-if="article!==[] ">
     <div class="top">
       <img class="back-to-top"
-           src="https://upload-images.jianshu.io/upload_images/18103462-29dc9627caa8be58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/650/format/webp">
+           src="../../assets/top.png">
     </div>
     <div id="header">
 <!--      <div id="tit">-->
@@ -58,40 +58,6 @@
         <h3>
           每日精选
         </h3>
-<!--        <ul>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/0cb5f5573b64" target="_blank">JavaScript学习 第一章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/f793e41d427f" target="_blank">JavaScript学习 第二章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/559592dbfee1" target="_blank">JavaScript学习 第三章</a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--        <h3>-->
-<!--          人气排行-->
-<!--        </h3>-->
-<!--        <ul>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/acc0b9ddae8a" target="_blank">1. 初识HTTP协议</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/00b61fe3a729" target="_blank">2. Git与GitHub简单介绍</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/e37c1de69852" target="_blank">3. Web前端</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/559592dbfee1" target="_blank">4. JavaScript学习 第三章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/f793e41d427f" target="_blank">5. JavaScript学习 第二章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/0cb5f5573b64" target="_blank">6. JavaScript学习 第一章</a>-->
-<!--          </li>-->
-<!--        </ul>-->
       </div>
       <div id="content">
         <div id="box1">
@@ -119,11 +85,9 @@
 </template>
 <style scoped>
 
-
   * {
     margin: 0;
     padding: 0;
-
   }
 
   a {
@@ -398,10 +362,25 @@
         this.$router.push('/login')
       }
       this.getAllArticles();//取得文章数据
-    },
-    created(){
 
+      $(function () {
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 180) {
+            $(".back-to-top").fadeIn(500);
+
+          }
+          else {
+            $(".back-to-top").fadeOut(1);
+          }
+        });
+
+        $(".back-to-top").click(function () {
+          $('body,html').animate({scrollTop: 0}, 100);
+          return false;
+        });
+      });
     },
+
     methods:{
       getAllArticles:function(){
         request.post('/api/goArticle/all').then(res=>{
@@ -428,21 +407,5 @@
       }
     }
   }
-  $(function () {
-    $(window).scroll(function () {
 
-      if ($(window).scrollTop() > 180) {
-        $(".back-to-top").fadeIn(500);
-
-      }
-      else {
-        $(".back-to-top").fadeOut(1);
-      }
-    });
-
-    $(".back-to-top").click(function () {
-      $('body,html').animate({scrollTop: 0}, 100);
-      return false;
-    });
-  });
 </script>
