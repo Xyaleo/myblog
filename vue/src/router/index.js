@@ -16,21 +16,42 @@ export default new Router({
     {
       path:'/home',
       name:'Home',
-      component:Home
+      component:Home,
+      meta: {
+        // 页面标题title
+        title: '主页'
+      }
     },{
       path:'/login',
       name:'Login',
-      component:Login
+      component:Login,
+      meta: {
+        // 页面标题title
+        title: '登陆注册'
+      }
     },
     {
       path:'/editer',
       name:'Editer',
-      component:Editer
+      component:Editer,
+      meta: {
+        // 页面标题title
+        title: '发布文章'
+      }
     },
     {
       path:'/p/:id',
-        name:'Article',
-      component:Article
+      name:'Article',
+      component:Article,
+      meta: {
+        // 页面标题title
+        title: '文章'
+      }
     }
   ]
 })
+
+
+
+
+
