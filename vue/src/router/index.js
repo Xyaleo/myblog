@@ -1,13 +1,16 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+//import Vue from 'vue'
+//const Vue = require('vue')
+//const Router = require('vue-router')
+//import Router from 'vue-router'
+//const Login = require('@/components/views/login')
 import Login from '@/components/views/login'
 import Home from '@/components/views/home'
 import Article from '@/components/views/article'
 import Editer from '@/components/views/editer'
 
-Vue.use(Router)
+//Vue.use(Router)
 
-export default new Router({
+export default new VueRouter({
   routes: [
     {
       path: '/',

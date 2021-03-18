@@ -6,44 +6,10 @@
   <body>
   <div id="bg" v-if="article!==[]">
     <div class="top">
-      <img class="back-to-top"
-           src="../../assets/top.png">
+      <back-vue></back-vue>
     </div>
     <div id="header">
-      <div id="nav1" >
-        <div id="guide">
-        <div id="tit">
-          🍊 博客
-        </div>
-        <ul id="gui">
-          <li class="active">
-            <a href="#/home">博客</a>
-          </li>
-          <li>
-            <a href="#">相册</a>
-          </li>
-          <li>
-            <a href="#">论坛</a>
-          </li>
-          <li>
-            <a href="#">专题</a>
-          </li>
-          <li>
-            <a href="#">关于</a>
-          </li>
-        </ul>
-          <div id="write" @click="write">
-            <p>
-            创作文章
-            </p>
-          </div>
-        <div id="user">
-          用户名： {{name}}
-        </div>
-          <div id="logoff" @click="quit">退出登录</div>
-        <br class="clear"/>
-      </div>
-      </div>
+      <nav-vue :name="name" @quit1="quit"></nav-vue>
     </div>
     <div id="ad">
       <img src="../../assets/logo1.png" width="1120" height="200" alt="">
@@ -53,40 +19,6 @@
         <h3>
           每日精选
         </h3>
-<!--        <ul>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/0cb5f5573b64" target="_blank">JavaScript学习 第一章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/f793e41d427f" target="_blank">JavaScript学习 第二章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/559592dbfee1" target="_blank">JavaScript学习 第三章</a>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--        <h3>-->
-<!--          人气排行-->
-<!--        </h3>-->
-<!--        <ul>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/acc0b9ddae8a" target="_blank">1. 初识HTTP协议</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/00b61fe3a729" target="_blank">2. Git与GitHub简单介绍</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/e37c1de69852" target="_blank">3. Web前端</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/559592dbfee1" target="_blank">4. JavaScript学习 第三章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/f793e41d427f" target="_blank">5. JavaScript学习 第二章</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.jianshu.com/p/0cb5f5573b64" target="_blank">6. JavaScript学习 第一章</a>-->
-<!--          </li>-->
-<!--        </ul>-->
       </div>
       <div id="content">
         <div id="box1">
@@ -195,65 +127,6 @@
     background: #f1f0f0;
   }
 
-  #tit {
-    float: left;
-    margin-left: 60px;
-    margin-right: 20px;
-    font-size: 2em;
-    font-family: "Agency FB",serif;
-    font-weight:bold;
-    color: #f45b4d;
-    white-space: nowrap;
-  }
-
-  #write {
-    float:left;
-    background-color: #f45b4d;
-    height: 40px;
-    width: 110px;
-    line-height: 41px;
-    margin: 10px 0 10px 30px;
-    border-radius:10px;
-    font-size: 24px;
-    text-align: center;
-    white-space: nowrap;
-    font-family: "Agency FB",serif;
-    text-decoration: none;
-    text-transform: lowercase;
-    color: #f3f3f3;
-    cursor:pointer;
-  }
-
-  #user {
-    float:left;
-    margin-left: 30px;
-    margin-right: 30px;
-    font-size: 24px;
-    white-space: nowrap;
-    font-family: "Agency FB",serif;
-  }
-
-  #logoff{
-    float: left;
-    text-decoration: none;
-    text-transform: lowercase;
-    font-family: "Agency FB",serif;
-    font-size: 22px;
-    width: fit-content;
-    color: #1b1b19;
-    cursor:pointer;
-  }
-
-  #logoff:hover {
-    text-decoration: none;
-    color: #f45b4d;
-  }
-
-  #guide{
-    position: relative;
-    width: 1380px;
-    margin: 0 auto 0 auto;
-  }
   #main {
     position: relative;
     padding: 0;
@@ -266,67 +139,6 @@
   #main ul li {
     padding: 8px 0 8px 0;
     border-top: dotted 1px #d9d9d9;
-  }
-
-  .back-to-top {
-    display:none;
-    position: fixed;
-    right: 2%;
-    bottom: 5%;
-    width: 5%;
-    height: auto;
-    z-index: 1000;
-    cursor: pointer;
-  }
-
-  #nav1 {
-    position: fixed;
-    top:0;
-    width: 100%;
-    height: 56px;
-    line-height: 56px;
-    left:0;
-    background: #ffffff;
-    font-size: 24px;
-    font-family: 幼圆,serif;
-    z-index:9;
-    border-color: #f0f0f0;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.05);
-  }
-
-  #gui a {
-    text-decoration: none;
-    text-transform: lowercase;
-    color: #1b1b19;
-  }
-
-  #gui a:hover {
-    text-decoration: none;
-    color: #f45b4d;
-  }
-
-  #nav1 ul {
-    list-style: none;
-    margin: 0 auto;
-    text-align: center;
-    width:auto;
-    float:left;
-    white-space: nowrap;
-  }
-
-  #nav1 ul li {
-    display: inline;
-    text-align: center;
-    padding: 0.5em 0.3em 0.5em 0.3em;
-  }
-
-  #nav1 ul li a {
-    padding: 0.5em 1em 0.9em 1em;
-    font-weight:bold;
-  }
-
-  #nav1 ul li.active a {
-    color: #f45b4d;
   }
 
   #content {
@@ -358,8 +170,8 @@
   /*引入公共方法*/
   import { getCookie,delCookie } from '../../assets/js/cookie.js'
   import request from 'axios';
-
-
+  import navVue from '@/components/views/nav'
+  import backVue from '@/components/views/backtop'
   export default{
     data(){
       return{
@@ -367,7 +179,10 @@
         article:[]
       }
     },
-
+    components:{
+      navVue,
+      backVue
+    },
     mounted(){
       /*页面挂载获取保存的cookie值，渲染到页面上*/
       let uname = getCookie('username');
@@ -383,22 +198,6 @@
         this.article = res.data;
       });
       // con.innerHTML=this.article.text;
-      $(function () {
-        $(window).scroll(function () {
-          if ($(window).scrollTop() > 180) {
-            $(".back-to-top").fadeIn(500);
-
-          }
-          else {
-            $(".back-to-top").fadeOut(1);
-          }
-        });
-
-        $(".back-to-top").click(function () {
-          $('body,html').animate({scrollTop: 0}, 100);
-          return false;
-        });
-      });
     },
     methods:{
       getAllArticles:function(){
