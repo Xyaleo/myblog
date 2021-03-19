@@ -11,10 +11,11 @@ import Editer from '@/components/views/editer'
 //Vue.use(Router)
 
 export default new VueRouter({
+  mode: 'hash',
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/home'
     },
     {
       path:'/home',

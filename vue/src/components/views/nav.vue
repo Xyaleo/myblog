@@ -160,14 +160,18 @@
 </style>
 <script>
   /*引入公共方法*/
-
+  import request from 'axios';
   export default{
     props:["name"],
 
     methods:{
       quit1(){
-        /*删除cookie*/
-        this.$emit('quit1');
+        request.get('/api/goLogout').then(res=>{
+          window.localStorage.removeItem('name');
+          this.$router.push({
+            path: res.data.ur
+          })
+        });
       },
       write(){
         this.$router.push({

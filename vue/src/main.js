@@ -31,8 +31,24 @@ new Vue({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
+  const name = window.localStorage.getItem('name')
+  console.log(name,to.name)
+  if ( !name && to.name!=='Login') {
+      document.title = '登陆注册'
+    next({
+      path: '/login'
+    });
+  } else if (name && to.name === 'Login') {
+    // 已登录 && 前往登录页面, 则不被允许，会重定向到首页
+      document.title = '主页'
+    next({
+      path: '/home',
+    });
+  } else {
+    if (to.meta.title) {
+      document.title = to.meta.title
+    }
+    next();
   }
-  next()
+
 })

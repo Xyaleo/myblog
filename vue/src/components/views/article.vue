@@ -9,7 +9,7 @@
       <back-vue></back-vue>
     </div>
     <div id="header">
-      <nav-vue :name="name" @quit1="quit"></nav-vue>
+      <nav-vue :name="name" ></nav-vue>
     </div>
     <div id="ad">
       <img src="../../assets/logo1.png" width="1120" height="200" alt="">
@@ -184,18 +184,25 @@
       backVue
     },
     mounted(){
-      /*页面挂载获取保存的cookie值，渲染到页面上*/
-      let uname = getCookie('username');
-      this.name = uname
-      /*如果cookie不存在，则跳转到登录页*/
-      if(uname == ""){
+      let uname = window.localStorage.getItem('name');
+      if(!uname){
         this.$router.push('/login')
       }
+      this.name = uname;
       let aid=this.$route.params.id;
       request.post("/api/goArticle/one",{
         aid:aid
       }).then(res=>{
-        this.article = res.data;
+        if(res.data.sta === 'no') {
+          window.localStorage.removeItem('name');
+          alert("账号未登录，请重新登陆");
+          this.$router.push({
+            path: res.data.ur
+          })
+        }else{
+          this.article = res.data;
+        }
+
       });
       // con.innerHTML=this.article.text;
     },
@@ -208,11 +215,7 @@
           this.article = res.data;
         })
       },
-      quit(){
-        /*删除cookie*/
-        delCookie('username');
-        this.$router.push('/login')
-      },
+
       write(){
         this.$router.push({
           path: `/editer`

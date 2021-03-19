@@ -111,12 +111,6 @@
       }
     },
     mounted(){
-      /*页面挂载获取保存的cookie值，渲染到页面上*/
-      let uname = getCookie('username');
-      /*如果cookie不存在，则跳转到登录页*/
-      if(uname === ""){
-        this.$router.push('/login')
-      }
     },
     methods: {
       back(){
@@ -241,7 +235,7 @@
         let time = hour + ":" + minu + ":" + sec;
         let text = document.querySelector('.editor').innerHTML;
         let title = document.getElementsByClassName("title")[0].value;
-        let uname = getCookie('username');
+        let uname = window.localStorage.getItem('name');
         if(title.match(/^[ ]*$/)){
           alert("上传失败 原因：标题不能为空")
         }else if(text === '<div><br></div>' || text === '<br>' || text === ''){
@@ -254,12 +248,20 @@
           date:date,
           time:time
         }).then((res) => {
-          console.log(res);
-          /*接口的传值(-1,上传失败)*/
-          if (res.data.code === 1) {
-            alert("发布成功");
-          } else {
-            alert("发布失败 原因：此标题不能与您已发布的文章标题相同");
+          if(res.data.sta === 'no') {
+            window.localStorage.removeItem('name');
+            alert("账号未登录，请重新登陆");
+            this.$router.push({
+              path: res.data.ur
+            })
+          }else {
+            console.log(res);
+            /*接口的传值(-1,上传失败)*/
+            if (res.data.code === 1) {
+              alert("发布成功");
+            } else {
+              alert("发布失败 原因：此标题不能与您已发布的文章标题相同");
+            }
           }
         })
         }

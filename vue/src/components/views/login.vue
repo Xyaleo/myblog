@@ -153,12 +153,7 @@
     },
     mounted(){
       /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
-      console.log(
-        "123"
-      );
-      if(getCookie('username')){
-        this.$router.push('/home')
-      }
+
     },
     methods: {
 
@@ -213,7 +208,7 @@
             } else {
               this.tishi = "登录成功";
               this.showTishi = true;
-              setCookie('username', this.username, 1000 * 60);
+              window.localStorage.setItem('name',this.username);
               setTimeout(function () {
                 this.$router.push('/home')
               }.bind(this), 2000)
