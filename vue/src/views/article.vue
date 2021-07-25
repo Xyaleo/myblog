@@ -1,18 +1,14 @@
 <template>
-  <!--  <div class="text">-->
-  <!--    <h3>当前用户： {{name}}</h3>-->
-  <!--    <a href="#" @click="quit">退出登录</a>-->
-  <!--  </div>-->
   <body>
-  <div id="bg" v-if="article!==[]">
+  <div id="bg">
     <div class="top">
       <back-vue></back-vue>
     </div>
     <div id="header">
-      <nav-vue :name="name" ></nav-vue>
+      <nav-vue :name="name" page="a1"></nav-vue>
     </div>
     <div id="ad">
-      <img src="../../assets/logo1.png" width="1120" height="200" alt="">
+      <img src="../assets/logo1.png" width="1120" height="200" alt="">
     </div>
     <div id="main">
       <div id="sidebar1">
@@ -25,10 +21,8 @@
           <h1>{{article.title}}</h1>
           <br><br>
           <div id="con" v-html="article.text">
-
           </div>
         </div>
-        <br class="clear"/>
       </div>
       <br class="clear"/>
     </div>
@@ -61,15 +55,6 @@
     margin-bottom: 1.25em;
     font-family: 幼圆;
     color: #000000;
-  }
-
-  img.left {
-    float: left;
-    margin: 8px 20px 20px 0;
-  }
-
-  img.top {
-    margin: 8px 0 20px 0;
   }
 
   p {
@@ -146,6 +131,7 @@
     padding: 28px;
     margin: 0 28px 0 274px;
     background: #ffffff;
+    min-height: calc(100vh - 360px);
   }
 
   #sidebar1 {
@@ -168,10 +154,9 @@
 </style>
 <script>
   /*引入公共方法*/
-  import { getCookie,delCookie } from '../../assets/js/cookie.js'
-  import request from 'axios';
-  import navVue from '@/components/views/nav'
-  import backVue from '@/components/views/backtop'
+  const request = require('axios');
+  import navVue from '@/components/nav'
+  import backVue from '@/components/backtop'
   export default{
     data(){
       return{
@@ -204,7 +189,6 @@
         }
 
       });
-      // con.innerHTML=this.article.text;
     },
     methods:{
       getAllArticles:function(){
@@ -213,12 +197,6 @@
           url:'/api/getData/all'
         }).then(res=>{
           this.article = res.data;
-        })
-      },
-
-      write(){
-        this.$router.push({
-          path: `/editer`
         })
       }
     }

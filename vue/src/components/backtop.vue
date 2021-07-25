@@ -1,6 +1,6 @@
 <template>
   <img class="back-to-top"
-       src="../../assets/top.png">
+       src="../assets/top.png">
 </template>
 
 <style scoped>
@@ -16,8 +16,8 @@
   }
 </style>
 <script>
+  const $ = require('jquery');
 export default{
-
   mounted() {
     $(function () {
       $(window).scroll(function () {

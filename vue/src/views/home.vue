@@ -1,18 +1,14 @@
 <template>
-<!--  <div class="text">-->
-<!--    <h3>当前用户： {{name}}</h3>-->
-<!--    <a href="#" @click="quit">退出登录</a>-->
-<!--  </div>-->
   <body>
-  <div id="bg" v-if="article!==[] ">
+  <div id="bg" >
     <div class="top">
       <back-vue></back-vue>
     </div>
     <div id="header">
-      <nav-vue :name="name"></nav-vue>
+      <nav-vue :name="name" page="a1"></nav-vue>
     </div>
     <div id="ad">
-      <img src="../../assets/logo1.png" width="1120" height="200" alt="">
+      <img src="../assets/logo1.png" width="1120" height="200" alt="">
     </div>
     <div id="main">
       <div id="sidebar1">
@@ -21,23 +17,7 @@
         </h3>
       </div>
       <div id="content">
-        <div id="box1">
-          <h2>
-            热门博客
-          </h2>
-          <div class="con">
-            <div v-bind:key="item.id" v-for="item of article" class="article" >
-              <a id="item_title" @click="toArticle(item.id)">{{item.title}}</a>
-              <div id="item_info">
-                <div id="item_brief">{{item.brief}}...</div>
-                <div id="item_name">{{item.name}}&nbsp&nbsp&nbsp&nbsp{{item.date}}</div>
-                <p></p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <br class="clear"/>
+        <home-vue></home-vue>
       </div>
       <br class="clear"/>
     </div>
@@ -76,14 +56,7 @@
     margin-bottom: 1.75em;
   }
 
-  .con {
-    float: left;
-    width:100%
-  }
 
-  #item_title{
-    cursor:pointer
-  }
 
   #bg {
     padding: 0 0 65px 0;
@@ -104,10 +77,6 @@
     border-color: #f45b4d;
   }
 
-  #box1 {
-    margin: 0 0 24px 0;
-    overflow: hidden;
-  }
 
   #box1 a {
     text-decoration: none;
@@ -146,18 +115,12 @@
     border-top: dotted 1px #d9d9d9;
   }
 
-  #item_title{
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.5;
-    display: block;
-    weight:90%;
-  }
   #content {
     width: 850px;
     padding: 28px;
     margin: 0 28px 0 274px;
     background: #ffffff;
+    min-height: calc(100vh - 360px);
   }
 
   #sidebar1 {
@@ -180,61 +143,31 @@
 </style>
 <script>
   /*引入公共方法*/
-  import { getCookie,delCookie } from '../../assets/js/cookie.js'
-  import request from 'axios';
-  import navVue from '@/components/views/nav'
-  import backVue from '@/components/views/backtop'
+  import navVue from '@/components/nav'
+  import backVue from '@/components/backtop'
+  import homeVue from '@/components/homepage'
+
   export default{
 
     data(){
       return{
-        name: '',
-        article:[],
+        name: ''
       }
     },
     components:{
       navVue,
-      backVue
+      backVue,
+      homeVue
     },
     mounted(){
-
       let uname = window.localStorage.getItem('name');
       if(!uname){
         this.$router.push('/login')
       }
       this.name = uname;
-      this.getAllArticles();//取得文章数据
-
     },
 
     methods:{
-      getAllArticles:function(){
-        request.post('/api/goArticle/all').then(res=>{
-          if(res.data.sta === 'no') {
-            window.localStorage.removeItem('name');
-            alert("账号未登录，请重新登陆");
-            this.$router.push({
-              path: res.data.ur
-            })
-          }else {
-            this.article = res.data;
-            for (let i = 0; i < res.data.length; i++) {
-              this.article[i].brief = res.data[i].text.replace(/<\/?[^>]*>/g, '').substring(0, 50)
-            }
-          }
-        })
-      },
-      toArticle:function(id){
-        this.$router.push({
-          path: `/p/${id}`
-        });
-      },
-
-      write(){
-        this.$router.push({
-          path: `/editer`
-        })
-      }
     }
   }
 

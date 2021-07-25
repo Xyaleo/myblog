@@ -1,4 +1,3 @@
-
 <template>
   <body>
   <div class="xr-editor">
@@ -85,11 +84,7 @@
 </template>
 
 <script>
-  import { getCookie } from '../../assets/js/cookie.js'
-  import request from 'axios';
-
-
-
+  const request = require('axios');
   export default {
     name: 'app',
     data() {
@@ -276,24 +271,7 @@
     margin: 0;
     background-color: #ffffff;
   }
- ::-webkit-scrollbar {/*滚动条整体样式*/
 
-    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 1px;
-  }
-
-::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 10px;
-    background-color: #7e7e7e;
-    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%,
-    rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
-  }
-
-::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: #EDEDED;
-
-  }
   .xr-editor {
     width: 100%;
     height: 100%;
